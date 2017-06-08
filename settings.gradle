@@ -1,0 +1,5 @@
+rootProject.name = 'projectmanagement'
+include 'project-management-server'
+include ':kotlin-core'
+include ':kotlin-networking'
+include ':kotlin-observable'
