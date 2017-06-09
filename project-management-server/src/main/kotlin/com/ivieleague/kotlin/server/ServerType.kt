@@ -1,17 +1,17 @@
 package com.ivieleague.kotlin.server
 
-sealed class ServerType<KOTLIN> {
-    object TBoolean : ServerType<Boolean>()
+sealed class ServerType {
+    object TBoolean : ServerType()
 
-    object TByte : ServerType<Byte>()
-    object TShort : ServerType<Short>()
-    object TInt : ServerType<Int>()
-    object TLong : ServerType<Long>()
+    object TByte : ServerType()
+    object TShort : ServerType()
+    object TInt : ServerType()
+    object TLong : ServerType()
 
-    object TFloat : ServerType<Float>()
-    object TDouble : ServerType<Double>()
+    object TFloat : ServerType()
+    object TDouble : ServerType()
 
-    object TString : ServerType<String>()
-    class TPointer(val table: Table) : ServerType<Pair<Table, String>>()
-    class TListPointers(val table: Table) : ServerType<Pair<Table, List<String>>>()
+    object TString : ServerType()
+    class TPointer(val table: Table) : ServerType()
+    class TListPointers(val table: Table) : ServerType()
 }
