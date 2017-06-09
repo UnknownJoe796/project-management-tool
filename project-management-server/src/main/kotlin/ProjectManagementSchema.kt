@@ -12,8 +12,8 @@ object ProjectManagementSchema {
                 type = ServerType.TString,
                 default = ""
         )
-        val role = property(
-                name = "property",
+        val type = property(
+                name = "type",
                 type = ServerType.TString,
                 default = ""
         )
