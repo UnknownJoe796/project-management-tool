@@ -3,8 +3,8 @@
  */
 
 import com.github.salomonbrys.kotson.jsonObject
-import com.ivieleague.kotlin.server.GraphQLSchemaGenerator
 import com.ivieleague.kotlin.server.SimpleMemoryDao
+import com.ivieleague.kotlin.server.graphQL
 import com.lightningkite.kotlin.networking.MyGson
 import com.lightningkite.kotlin.networking.gsonToString
 import com.lightningkite.kotlin.networking.toJsonArray
@@ -24,8 +24,7 @@ fun main(vararg strings: String) {
 
 //    Database.connect("127.0.0.1:5432", "org.postgresql.Driver", user = "postgres", password = "4E&619>r0Kxl")
     val memoryDao = SimpleMemoryDao()
-    val schema = GraphQLSchemaGenerator(memoryDao, MahSchema.tables).build()
-    val graphql = GraphQL.newGraphQL(schema).build()
+    val graphql = GraphQL.newGraphQL(MahSchema.graphQL(memoryDao)).build()
 
     memoryDao.set(MahSchema.Note, null, mapOf(MahSchema.Note.title to "Example", MahSchema.Note.content to "Some example content"), listOf())
 
