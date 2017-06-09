@@ -7,3 +7,6 @@
 [submodule "kotlin-observable"]
 	path = kotlin-observable
 	url = https://github.com/lightningkite/kotlin-observable.git
+[submodule "kotlin-server"]
+	path = kotlin-server
+	url = https://github.com/UnknownJoe796/kotlin-server.git

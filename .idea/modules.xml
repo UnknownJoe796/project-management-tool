@@ -11,6 +11,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable.iml" group="kotlin-observable" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_main.iml" group="kotlin-observable" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_test.iml" group="kotlin-observable" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server.iml" group="kotlin-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" group="kotlin-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" group="kotlin-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server.iml" group="project-management-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server_main.iml" group="project-management-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-server/project-management-server_test.iml" group="project-management-server" />

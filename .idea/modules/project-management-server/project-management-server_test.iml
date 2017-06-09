@@ -47,6 +47,7 @@
     <orderEntry type="module" module-name="kotlin-core_main" />
     <orderEntry type="module" module-name="kotlin-networking_main" />
     <orderEntry type="module" module-name="kotlin-observable_main" />
+    <orderEntry type="module" module-name="kotlin-server_main" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.2-2" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-runtime:1.1.1" level="project" />

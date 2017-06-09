@@ -3,3 +3,5 @@ include 'project-management-server'
 include ':kotlin-core'
 include ':kotlin-networking'
 include ':kotlin-observable'
+include ':kotlin-server'
+
