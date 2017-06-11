@@ -1,6 +1,6 @@
+import com.ivieleague.kotlin.server.ScalarType
 import com.ivieleague.kotlin.server.Schema
 import com.ivieleague.kotlin.server.ServerEnum
-import com.ivieleague.kotlin.server.ServerType
 import com.ivieleague.kotlin.server.TableImpl
 
 /**
@@ -12,19 +12,19 @@ object MahSchema : Schema {
         val title = property(
                 name = "title",
                 description = "The title of the note.",
-                type = ServerType.TString,
+                type = ScalarType.TString,
                 default = ""
         )
         val content = property(
                 name = "content",
                 description = "The content of the note.",
-                type = ServerType.TString,
+                type = ScalarType.TString,
                 default = ""
         )
         val related = property(
                 name = "related",
                 description = "A related note.",
-                type = ServerType.TPointer(this),
+                type = ScalarType.TPointer(this),
                 default = null
         )
     }
