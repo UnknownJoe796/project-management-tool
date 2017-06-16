@@ -3,6 +3,8 @@
  */
 
 import com.ivieleague.kotlin.server.MemoryDatabaseAccess
+import com.ivieleague.kotlin.server.SecurityTableAccess
+import com.ivieleague.kotlin.server.core.Instance
 import com.ivieleague.kotlin.server.core.Write
 import com.ivieleague.kotlin.server.restPlus
 import org.jetbrains.ktor.host.embeddedServer
@@ -35,7 +37,11 @@ fun main(vararg strings: String) {
             }
             route("rest") {
                 route("note") {
-                    restPlus(MemoryDatabaseAccess[Note])
+                    restPlus(SecurityTableAccess(MemoryDatabaseAccess[Note]), {
+                        if (it.request.headers["Authorization"] != null)
+                            Instance("283912", mapOf(), mapOf(), mapOf())
+                        else null
+                    })
                 }
             }
         }

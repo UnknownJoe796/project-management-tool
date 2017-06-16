@@ -1,7 +1,4 @@
-import com.ivieleague.kotlin.server.core.Link
-import com.ivieleague.kotlin.server.core.Scalar
-import com.ivieleague.kotlin.server.core.ScalarType
-import com.ivieleague.kotlin.server.core.TableImpl
+import com.ivieleague.kotlin.server.core.*
 
 
 object Note : TableImpl("note", "A note of some kind") {
@@ -23,4 +20,8 @@ object Note : TableImpl("note", "A note of some kind") {
             description = "A related note.",
             table = Note
     ).register()
+
+    init {
+        this.writePermission = { user -> if (user != null) Condition.Always else Condition.Never }
+    }
 }
