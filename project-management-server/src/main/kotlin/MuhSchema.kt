@@ -1,30 +1,26 @@
-import com.ivieleague.kotlin.server.*
+import com.ivieleague.kotlin.server.core.Link
+import com.ivieleague.kotlin.server.core.Scalar
+import com.ivieleague.kotlin.server.core.ScalarType
+import com.ivieleague.kotlin.server.core.TableImpl
 
-/**
- * Created by josep on 6/8/2017.
- */
-object MuhSchema : Schema {
 
-    object Note : TableImpl("note", "A note") {
-        val title = Scalar.Standard(
-                name = "title",
-                description = "The title of the note.",
-                type = ScalarType.ShortString,
-                default = { "<no name>" }
-        ).register()
-        val content = Scalar.Standard(
-                name = "content",
-                description = "The content of the note.",
-                type = ScalarType.ShortString,
-                default = { "<no name>" }
-        ).register()
-        val related = Link.Standard(
-                name = "related",
-                description = "A related note.",
-                table = Note
-        ).register()
-    }
+object Note : TableImpl("note", "A note of some kind") {
 
-    override val tables = mapOf(Note.tableName to Note)
-    override val enums: Map<String, ServerEnum> = mapOf()
+    val title = Scalar(
+            key = "title",
+            description = "The title of the note.",
+            type = ScalarType.ShortString
+    ).register()
+
+    val content = Scalar(
+            key = "content",
+            description = "The content of the note.",
+            type = ScalarType.ShortString
+    ).register()
+
+    val related = Link(
+            key = "related",
+            description = "A related note.",
+            table = Note
+    ).register()
 }
