@@ -23,15 +23,6 @@ fun main(vararg strings: String) {
     val xodusEntityStore = PersistentEntityStores.newInstance("C:\\XodusTest\\")
     val xodus = XodusAccess(xodusEntityStore)
 
-//    xodus[Note].update(null, Write(
-//            id = null,
-//            scalars = mapOf(Note.title to "Example", Note.content to "Some example content"),
-//            links = mapOf(Note.related to Write(
-//                    id = null,
-//                    scalars = mapOf(Note.title to "Related", Note.content to "Don't mind me.")
-//            ))
-//    ))
-
     embeddedServer(Netty, 8080) {
         routing {
             get("/") {
