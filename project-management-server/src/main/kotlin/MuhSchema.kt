@@ -22,6 +22,7 @@ object Note : TableImpl("note", "A note of some kind") {
     ).register()
 
     init {
-        this.writePermission = { user -> if (user != null) Condition.Always else Condition.Never }
+        this.writeBeforePermission = { user -> if (user != null) Condition.Always else Condition.Never }
+        this.writeAfterPermission = { user -> if (user != null) Condition.Always else Condition.Never }
     }
 }
