@@ -3,12 +3,15 @@
  */
 
 import com.ivieleague.kotlin.server.SecurityTableAccess
-import com.ivieleague.kotlin.server.core.Instance
+import com.ivieleague.kotlin.server.model.Instance
 import com.ivieleague.kotlin.server.restPlus
 import com.ivieleague.kotlin.server.xodus.XodusAccess
 import jetbrains.exodus.entitystore.PersistentEntityStores
+import org.jetbrains.ktor.application.install
+import org.jetbrains.ktor.features.Compression
 import org.jetbrains.ktor.host.embeddedServer
 import org.jetbrains.ktor.http.ContentType
+import org.jetbrains.ktor.logging.CallLogging
 import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.response.respondText
 import org.jetbrains.ktor.routing.get
@@ -24,6 +27,8 @@ fun main(vararg strings: String) {
     val xodus = XodusAccess(xodusEntityStore)
 
     embeddedServer(Netty, 8080) {
+        install(CallLogging)
+        install(Compression)
         routing {
             get("/") {
                 it.respondText("Hello, world!", ContentType.Text.Html)
