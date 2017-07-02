@@ -6,7 +6,7 @@
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../kotlin-core/build/kotlin-classes/test" />
-          <option name="classpath" value="$MODULE_DIR$/../../../kotlin-core/build/classes/main;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.1.2-3/552a40eb47669b78f0f194d526cb21b3aa1f8319/kotlin-stdlib-1.1.2-3.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/4e031bb61df09069aeb2bffb4019e7a5034a4ee0/junit-4.11.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-junit/1.1.2-3/be31fb5a614475bdab18eacdb3c5ee95c3ad660d/kotlin-test-junit-1.1.2-3.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.1.2-3/3be30e0540b032eb4ce400b86c699beafbe5e918/kotlin-test-1.1.2-3.jar" />
+          <option name="classpath" value="$MODULE_DIR$/../../../kotlin-core/build/classes/main;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.1.2-5/508b8b59843653756aeed058a3a421afa0657bcb/kotlin-stdlib-1.1.2-5.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/4e031bb61df09069aeb2bffb4019e7a5034a4ee0/junit-4.11.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-junit/1.1.2-5/8bf6b2e1f1f330322a25521ba65193178243e74/kotlin-test-junit-1.1.2-5.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar;C:/Users/josep/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.1.2-5/9896122c1e7a78539937cffc87deeb98eeddb53d/kotlin-test-1.1.2-5.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="kotlin-core_main" />
@@ -37,12 +37,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="kotlin-core_main" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.1.2-3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.1.2-5" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-junit:1.1.2-3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-junit:1.1.2-5" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:1.1.2-3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:1.1.2-5" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="kotlin-core_main" />
 </module>
