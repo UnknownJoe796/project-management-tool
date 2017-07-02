@@ -1,3 +1,4 @@
+import com.ivieleague.kotlin.server.auth.AbstractUserTable
 import com.ivieleague.kotlin.server.model.*
 
 
@@ -62,7 +63,7 @@ object Task : TableImpl("task", "A task, representing anything as large as a pro
     val assignee = Link(
             key = "assignee",
             description = "The person currently assigned to this task",
-            table = Person
+            table = User
     ).register()
 
     val comments = Multilink(
@@ -77,7 +78,7 @@ object Comment : TableImpl("comment", "A comment on a task") {
     val author = Link(
             key = "author",
             description = "The person who wrote this comment",
-            table = Person
+            table = User
     ).register()
 
     val posted = Scalar(
@@ -93,7 +94,7 @@ object Comment : TableImpl("comment", "A comment on a task") {
     ).register()
 }
 
-object Person : TableImpl("person", "An employee") {
+object User : AbstractUserTable("user", "An employee") {
     val firstName = Scalar(
             key = "first_name",
             description = "The first name",
@@ -105,6 +106,12 @@ object Person : TableImpl("person", "An employee") {
             description = "The last name",
             type = ScalarType.ShortString
     ).register()
+
+    val email = Scalar(
+            key = "email",
+            description = "The email",
+            type = ScalarType.ShortString
+    ).register()
 }
 
 object Time : TableImpl("time", "A time segment, representing time an employee spent on a task.") {
@@ -112,7 +119,7 @@ object Time : TableImpl("time", "A time segment, representing time an employee s
     val person = Link(
             key = "person",
             description = "The person who did the work",
-            table = Person
+            table = User
     ).register()
 
     val task = Link(
