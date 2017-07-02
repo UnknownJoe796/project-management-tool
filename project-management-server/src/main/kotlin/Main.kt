@@ -2,8 +2,10 @@
  * Created by josep on 5/31/2017.
  */
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import com.ivieleague.kotlin.server.SecurityTableAccess
-import com.ivieleague.kotlin.server.model.Instance
+import com.ivieleague.kotlin.server.auth.makeTokenEndpoint
 import com.ivieleague.kotlin.server.restPlus
 import com.ivieleague.kotlin.server.xodus.XodusAccess
 import jetbrains.exodus.entitystore.PersistentEntityStores
@@ -26,6 +28,14 @@ fun main(vararg strings: String) {
     val xodusEntityStore = PersistentEntityStores.newInstance("C:\\XodusTest\\")
     val xodus = XodusAccess(xodusEntityStore)
 
+    val authUserTable = AuthUser(Person)
+    val algorithm = Algorithm.HMAC512("This is a bunch of test chaos! f j8a9w4hroaskj df89wp alksjd c8i9b0xoiwj4r")
+    val authGetter = AuthUser.makeUserGetter<Person>(
+            tableAccess = xodus[authUserTable],
+            verifier = JWT.require(algorithm)
+                    .build()
+    )
+
     embeddedServer(Netty, 8080) {
         install(CallLogging)
         install(Compression)
@@ -34,12 +44,15 @@ fun main(vararg strings: String) {
                 it.respondText("Hello, world!", ContentType.Text.Html)
             }
             route("rest") {
+
+                makeTokenEndpoint<Person>("token", xodus[authUserTable], "ivieleague.com", 10000000, algorithm)
+
+                route("person") {
+                    restPlus(SecurityTableAccess(xodus[Person]), authGetter)
+                }
+
                 route("note") {
-                    restPlus(SecurityTableAccess(xodus[Note]), {
-                        if (it.request.headers["Authorization"] != null)
-                            Instance("283912", mapOf(), mapOf(), mapOf())
-                        else null
-                    })
+                    restPlus(SecurityTableAccess(xodus[Note]), authGetter)
                 }
             }
         }
