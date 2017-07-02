@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/kotlin-core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/kotlin-javafx" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/kotlin-networking" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/kotlin-observable" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/kotlin-server" vcs="Git" />

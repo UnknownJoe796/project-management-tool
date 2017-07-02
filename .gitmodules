@@ -10,3 +10,6 @@
 [submodule "kotlin-server"]
 	path = kotlin-server
 	url = https://github.com/UnknownJoe796/kotlin-server.git
+[submodule "kotlin-javafx"]
+	path = kotlin-javafx
+	url = https://github.com/UnknownJoe796/kotlin-javafx.git
