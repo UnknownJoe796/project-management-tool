@@ -71,14 +71,14 @@ private fun Route.login(userTableAccess: UserTableAccess) {
         exceptionWrap {
             val requestString = it.request.receive<String>()
             val (email, password) = try {
-                val request = json.readValue(requestString, Map::class.java) as Map<String, Any?>
+                val request = JsonObjectMapper.readValue(requestString, Map::class.java) as Map<String, Any?>
                 (request["email"] as String) to (request["password"] as String)
             } catch(e: Exception) {
                 throw exceptionBadRequest(e.message)
             }
             val result = userTableAccess.login(User.email, email, password)
-            val stringResult = result?.let { json.writeValueAsString(JSON.serializeInstance(it)) }
-            it.respondText(stringResult ?: "{}", ContentType.Application.Json)
+            val stringResult = result.toJsonString()
+            it.respondText(stringResult, ContentType.Application.Json)
         }
     }
 }

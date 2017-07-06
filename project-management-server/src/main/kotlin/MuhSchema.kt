@@ -28,7 +28,90 @@ object Note : TableImpl("note", "A note of some kind") {
     }
 }
 
+object User : AbstractUserTable("user", "An employee") {
+    init {
+        writeBeforePermission = { user -> user?.id?.let { Condition.IdEquals(equals = it) } ?: Condition.Never }
+    }
+
+    val firstName = Scalar(
+            key = "first_name",
+            description = "The first name",
+            type = ScalarType.ShortString
+    ).register()
+
+    val lastName = Scalar(
+            key = "last_name",
+            description = "The last name",
+            type = ScalarType.ShortString
+    ).register()
+
+    val email = Scalar(
+            key = "email",
+            description = "The email",
+            type = ScalarType.ShortString
+    ).register()
+}
+
+object Organization : AbstractUserTable("organization", "An organization that employees can belong to.") {
+
+    init {
+        //user must be an admin
+        writeBeforePermission = { user -> user?.id?.let { Condition.MultilinkContains(multilink = admins, id = it) } ?: Condition.Never }
+        writeAfterPermission = { user -> user?.id?.let { Condition.MultilinkContains(multilink = admins, id = it) } ?: Condition.Never }
+
+        readPermission = { user ->
+            user?.id?.let {
+                Condition.MultilinkContains(multilink = Organization.members, id = it)
+            } ?: Condition.Never
+        }
+    }
+
+    val name = Scalar(
+            key = "name",
+            description = "The name of the organization",
+            type = ScalarType.ShortString
+    ).register()
+
+    val members = Multilink(
+            key = "members",
+            description = "The members of this organization",
+            table = User
+    ).register()
+
+    val admins = Multilink(
+            key = "admins",
+            description = "The admins of this organization",
+            table = User
+    ).register()
+}
+
 object Task : TableImpl("task", "A task, representing anything as large as a project and a small subtask.") {
+
+    //Security rules: You must belong to the organization to view it.
+    //user in it.organization.members
+    init {
+        readPermission = { user ->
+            user?.id?.let {
+                Condition.MultilinkContains(path = listOf(organization), multilink = Organization.members, id = it)
+            } ?: Condition.Never
+        }
+        writeAfterPermission = { user ->
+            user?.id?.let {
+                Condition.MultilinkContains(path = listOf(organization), multilink = Organization.members, id = it)
+            } ?: Condition.Never
+        }
+        writeBeforePermission = { user ->
+            user?.id?.let {
+                Condition.MultilinkContains(path = listOf(organization), multilink = Organization.members, id = it)
+            } ?: Condition.Never
+        }
+    }
+
+    val organization = Link(
+            key = "organization",
+            description = "The organization a task belongs to",
+            table = Organization
+    ).register()
 
     val name = Scalar(
             key = "name",
@@ -66,6 +149,12 @@ object Task : TableImpl("task", "A task, representing anything as large as a pro
             table = User
     ).register()
 
+    val times = Multilink(
+            key = "times",
+            description = "The times of this task",
+            table = Time
+    ).register()
+
     val comments = Multilink(
             key = "comments",
             description = "The comments of this task",
@@ -94,26 +183,6 @@ object Comment : TableImpl("comment", "A comment on a task") {
     ).register()
 }
 
-object User : AbstractUserTable("user", "An employee") {
-    val firstName = Scalar(
-            key = "first_name",
-            description = "The first name",
-            type = ScalarType.ShortString
-    ).register()
-
-    val lastName = Scalar(
-            key = "last_name",
-            description = "The last name",
-            type = ScalarType.ShortString
-    ).register()
-
-    val email = Scalar(
-            key = "email",
-            description = "The email",
-            type = ScalarType.ShortString
-    ).register()
-}
-
 object Time : TableImpl("time", "A time segment, representing time an employee spent on a task.") {
 
     val person = Link(
@@ -122,6 +191,7 @@ object Time : TableImpl("time", "A time segment, representing time an employee s
             table = User
     ).register()
 
+    // /!\ Not normalized
     val task = Link(
             key = "task",
             description = "The task being worked on",
