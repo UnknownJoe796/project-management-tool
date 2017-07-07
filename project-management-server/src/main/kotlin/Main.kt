@@ -3,22 +3,23 @@
  */
 
 import com.auth0.jwt.algorithms.Algorithm
-import com.ivieleague.kotlin.server.*
+import com.ivieleague.kotlin.server.SecurityTableAccess
 import com.ivieleague.kotlin.server.auth.TokenInformation
 import com.ivieleague.kotlin.server.auth.UserTableAccess
+import com.ivieleague.kotlin.server.respondJson
+import com.ivieleague.kotlin.server.restNest
 import com.ivieleague.kotlin.server.xodus.XodusAccess
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
-import org.jetbrains.ktor.application.receive
 import org.jetbrains.ktor.features.Compression
 import org.jetbrains.ktor.host.embeddedServer
-import org.jetbrains.ktor.http.ContentType
 import org.jetbrains.ktor.logging.CallLogging
 import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.request.header
-import org.jetbrains.ktor.response.respondText
-import org.jetbrains.ktor.routing.*
+import org.jetbrains.ktor.routing.get
+import org.jetbrains.ktor.routing.route
+import org.jetbrains.ktor.routing.routing
 
 data class LoginInfo(var email: String = "", var password: String = "")
 
@@ -48,37 +49,18 @@ fun main(vararg strings: String) {
         install(Compression)
         routing {
             get("/") {
-                it.respondText("Hello, world!", ContentType.Text.Html)
+                it.respondJson("Hello, world!")
             }
             route("rest") {
-
-                route("user") {
-                    restNest(SecurityTableAccess(userTableAccess), authGetter)
-                    login(userTableAccess)
-                }
-
-                route("note") {
-                    restNest(SecurityTableAccess(xodus[Note]), authGetter)
-                }
+                restNest(
+                        tableAccesses = listOf(
+                                SecurityTableAccess(userTableAccess),
+                                SecurityTableAccess(xodus[Note])
+                        ),
+                        userGetter = authGetter
+                )
             }
         }
         Unit
     }.start(wait = true)
-}
-
-private fun Route.login(userTableAccess: UserTableAccess) {
-    post("/login") {
-        exceptionWrap {
-            val requestString = it.request.receive<String>()
-            val (email, password) = try {
-                val request = JsonObjectMapper.readValue(requestString, Map::class.java) as Map<String, Any?>
-                (request["email"] as String) to (request["password"] as String)
-            } catch(e: Exception) {
-                throw exceptionBadRequest(e.message)
-            }
-            val result = userTableAccess.login(User.email, email, password)
-            val stringResult = result.toJsonString()
-            it.respondText(stringResult, ContentType.Application.Json)
-        }
-    }
 }

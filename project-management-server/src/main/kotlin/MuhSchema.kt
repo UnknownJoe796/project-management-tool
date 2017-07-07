@@ -30,7 +30,7 @@ object Note : TableImpl("note", "A note of some kind") {
 
 object User : AbstractUserTable("user", "An employee") {
     init {
-        writeBeforePermission = { user -> user?.id?.let { Condition.IdEquals(equals = it) } ?: Condition.Never }
+        writeBeforePermission = { user -> user?.id?.let { Condition.IdEquals(id = it) } ?: Condition.Never }
     }
 
     val firstName = Scalar(
