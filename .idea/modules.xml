@@ -17,6 +17,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server.iml" group="kotlin-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" group="kotlin-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" group="kotlin-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web.iml" group="kotlin-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_main.iml" group="kotlin-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_test.iml" group="kotlin-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-client.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-client.iml" group="project-management-client" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-client/project-management-client_main.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-client/project-management-client_main.iml" group="project-management-client" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-management-client/project-management-client_test.iml" filepath="$PROJECT_DIR$/.idea/modules/project-management-client/project-management-client_test.iml" group="project-management-client" />

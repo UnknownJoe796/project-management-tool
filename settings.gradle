@@ -6,4 +6,5 @@ include ':kotlin-observable'
 include ':kotlin-server'
 include 'project-management-client'
 include 'kotlin-javafx'
+include 'kotlin-web'
 
