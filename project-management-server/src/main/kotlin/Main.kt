@@ -1,4 +1,5 @@
 /**
+ * A Nestful API
  * Created by josep on 5/31/2017.
  */
 
@@ -23,8 +24,6 @@ import org.jetbrains.ktor.request.header
 import org.jetbrains.ktor.routing.get
 import org.jetbrains.ktor.routing.route
 import org.jetbrains.ktor.routing.routing
-
-data class LoginInfo(var email: String = "", var password: String = "")
 
 fun main(vararg strings: String) {
 
