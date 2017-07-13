@@ -3,12 +3,15 @@
  */
 
 import com.auth0.jwt.algorithms.Algorithm
-import com.ivieleague.kotlin.server.SecurityTableAccess
 import com.ivieleague.kotlin.server.auth.TokenInformation
-import com.ivieleague.kotlin.server.auth.UserTableAccess
+import com.ivieleague.kotlin.server.auth.restLogin
+import com.ivieleague.kotlin.server.auth.user
+import com.ivieleague.kotlin.server.model.Schema
+import com.ivieleague.kotlin.server.model.register
 import com.ivieleague.kotlin.server.respondJson
 import com.ivieleague.kotlin.server.restNest
-import com.ivieleague.kotlin.server.xodus.XodusAccess
+import com.ivieleague.kotlin.server.security
+import com.ivieleague.kotlin.server.xodus.xodus
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
@@ -31,17 +34,19 @@ fun main(vararg strings: String) {
             Algorithm.HMAC512("This is a bunch of test chaos! f j8a9w4hroaskj df89wp alksjd c8i9b0xoiwj4r")
     )
 
-//    Database.connect("127.0.0.1:5432", "org.postgresql.Driver", user = "postgres", password = "4E&619>r0Kxl")
     val xodusEntityStore = PersistentEntityStores.newInstance("C:\\XodusTest\\")
-    val xodus = XodusAccess(xodusEntityStore)
 
-    val userTableAccess = UserTableAccess(xodus[User], tokenInformation)
+    val schema = Schema()
+    val userAccessDirect = User.xodus(schema, xodusEntityStore).user(tokenInformation)
+    val userAccess = userAccessDirect.security().register(schema)
+    val noteAccess = Note.xodus(schema, xodusEntityStore).security().register(schema)
+
     val authGetter = { call: ApplicationCall ->
         val token = call.request.header("Authorization")
         if (token == null)
             null
         else
-            tokenInformation.getUser(userTableAccess, token, userTableAccess.table.defaultRead())
+            tokenInformation.getUser(userAccess, token, userAccess.table.defaultRead())
     }
 
     embeddedServer(Netty, 8080) {
@@ -53,12 +58,12 @@ fun main(vararg strings: String) {
             }
             route("rest") {
                 restNest(
-                        tableAccesses = listOf(
-                                SecurityTableAccess(userTableAccess),
-                                SecurityTableAccess(xodus[Note])
-                        ),
+                        schema = schema,
                         userGetter = authGetter
                 )
+                route("user/login") {
+                    restLogin(userAccessDirect, User.email)
+                }
             }
         }
         Unit
