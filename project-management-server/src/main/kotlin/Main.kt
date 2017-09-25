@@ -36,16 +36,16 @@ fun main(vararg strings: String) {
     val xodusEntityStore = PersistentEntityStores.newInstance("C:\\XodusTest\\")
 
     val schema = Schema()
-    val userAccessDirect = User.xodus(schema, xodusEntityStore).user(tokenInformation)
+    val userAccessDirect = User.xodus(xodusEntityStore).user(tokenInformation)
     val userAccess = userAccessDirect.security().register(schema)
-    val noteAccess = Note.xodus(schema, xodusEntityStore).security().register(schema)
+    val noteAccess = Note.xodus(xodusEntityStore).security().register(schema)
 
     val authGetter = { call: ApplicationCall ->
         val token = call.request.header("Authorization")
         if (token == null)
             null
         else
-            tokenInformation.getUser(userAccess, token, userAccess.table.defaultRead())
+            tokenInformation.getUser(userAccess, schema, token, userAccess.table.defaultRead())
     }
 
     embeddedServer(Netty, 8080) {
@@ -61,7 +61,7 @@ fun main(vararg strings: String) {
                         userGetter = authGetter
                 )
                 route("user/login") {
-                    restLogin(userAccessDirect, User.email)
+                    restLogin(schema, userAccessDirect, User.email)
                 }
             }
         }
