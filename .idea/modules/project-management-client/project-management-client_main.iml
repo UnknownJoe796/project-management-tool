@@ -6,7 +6,6 @@
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../project-management-client/build/kotlin-classes/main" />
-          <option name="classpath" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.1.3/e47e1b9fa5db515a312aa37b7a16b97fffcdffee/kotlin-stdlib-jre8-1.1.3.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.1.3/e51ebc59da5103a2052859e89682c7f9c3456298/kotlin-stdlib-1.1.3.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.1.3/ca54720041043baefa0946f7ab2326934cfefd7f/kotlin-stdlib-jre7-1.1.3.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/com.github.salomonbrys.kotson/kotson/2.1.0/e7be27efa6e0b8afe7889ba1a5400580d6aa3373/kotson-2.1.0.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar:/home/joseph/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="project-management-client_main" />
@@ -28,7 +27,7 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../../../project-management-client/build/classes/main" />
+    <output url="file://$MODULE_DIR$/../../../project-management-client/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../project-management-client/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../../project-management-client/src/main/java" isTestSource="false" />
@@ -42,12 +41,12 @@
     <orderEntry type="module" module-name="kotlin-networking_main" />
     <orderEntry type="module" module-name="kotlin-observable_main" />
     <orderEntry type="module" module-name="kotlin-javafx_main" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.1.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.4.1" level="project" />
     <orderEntry type="library" name="Gradle: com.github.salomonbrys.kotson:kotson:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.1.4-2" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
   </component>
 </module>
