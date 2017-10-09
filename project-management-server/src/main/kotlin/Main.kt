@@ -33,7 +33,7 @@ fun main(vararg strings: String) {
             Algorithm.HMAC512("This is a bunch of test chaos! f j8a9w4hroaskj df89wp alksjd c8i9b0xoiwj4r")
     )
 
-    val xodusEntityStore = PersistentEntityStores.newInstance("C:\\XodusTest\\")
+    val xodusEntityStore = PersistentEntityStores.newInstance("~/xodus_test")
 
     val schema = Schema()
     val userAccessDirect = User.xodus(xodusEntityStore).user(tokenInformation)
