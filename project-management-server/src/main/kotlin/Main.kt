@@ -16,6 +16,8 @@ import com.ivieleague.kotlin.server.xodus.xodus
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
+import org.jetbrains.ktor.content.files
+import org.jetbrains.ktor.content.static
 import org.jetbrains.ktor.features.Compression
 import org.jetbrains.ktor.host.embeddedServer
 import org.jetbrains.ktor.logging.CallLogging
@@ -63,6 +65,9 @@ fun main(vararg strings: String) {
                 route("user/login") {
                     restLogin(schema, userAccessDirect, User.email)
                 }
+            }
+            static("static") {
+                files("static")
             }
         }
         Unit
