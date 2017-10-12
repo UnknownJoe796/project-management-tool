@@ -1,19 +1,24 @@
 import com.ivieleague.kotlin.server.auth.AbstractUserTable
-import com.ivieleague.kotlin.server.model.*
+import com.ivieleague.kotlin.server.model.PrimitiveType
+import com.ivieleague.kotlin.server.model.TableImpl
+import com.ivieleague.kotlin.server.type.Condition
+import com.ivieleague.kotlin.server.type.Link
+import com.ivieleague.kotlin.server.type.Multilink
+import com.ivieleague.kotlin.server.type.Primitive
 
 
 object Note : TableImpl("note", "A note of some kind") {
 
-    val title = Scalar(
+    val title = Primitive(
             key = "title",
             description = "The title of the note.",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
-    val content = Scalar(
+    val content = Primitive(
             key = "content",
             description = "The content of the note.",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
     val related = Link(
@@ -33,22 +38,22 @@ object User : AbstractUserTable("user", "An employee") {
         writeBeforePermission = { user -> user?.id?.let { Condition.IdEquals(id = it) } ?: Condition.Never }
     }
 
-    val firstName = Scalar(
+    val firstName = Primitive(
             key = "first_name",
             description = "The first name",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
-    val lastName = Scalar(
+    val lastName = Primitive(
             key = "last_name",
             description = "The last name",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
-    val email = Scalar(
+    val email = Primitive(
             key = "email",
             description = "The email",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 }
 
@@ -66,10 +71,10 @@ object Organization : AbstractUserTable("organization", "An organization that em
         }
     }
 
-    val name = Scalar(
+    val name = Primitive(
             key = "name",
             description = "The name of the organization",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
     val members = Multilink(
@@ -113,16 +118,16 @@ object Task : TableImpl("task", "A task, representing anything as large as a pro
             table = Organization
     ).register()
 
-    val name = Scalar(
+    val name = Primitive(
             key = "name",
             description = "The name of the task",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
-    val description = Scalar(
+    val description = Primitive(
             key = "description",
             description = "The description of the task",
-            type = ScalarType.ShortString
+            type = PrimitiveType.ShortString
     ).register()
 
     val subtasks = Multilink(
@@ -137,10 +142,10 @@ object Task : TableImpl("task", "A task, representing anything as large as a pro
             table = Task
     ).register()
 
-    val estimatedTime = Scalar(
+    val estimatedTime = Primitive(
             key = "estimated_time",
             description = "The amount of time this task is estimated to take, in hours",
-            type = ScalarType.Double
+            type = PrimitiveType.Double
     ).register()
 
     val assignee = Link(
@@ -170,16 +175,16 @@ object Comment : TableImpl("comment", "A comment on a task") {
             table = User
     ).register()
 
-    val posted = Scalar(
+    val posted = Primitive(
             key = "posted",
             description = "The time this comment was posted",
-            type = ScalarType.Date
+            type = PrimitiveType.Date
     ).register()
 
-    val content = Scalar(
+    val content = Primitive(
             key = "content",
             description = "The content of the comment",
-            type = ScalarType.LongString
+            type = PrimitiveType.LongString
     ).register()
 }
 
@@ -198,22 +203,22 @@ object Time : TableImpl("time", "A time segment, representing time an employee s
             table = Task
     ).register()
 
-    val time = Scalar(
+    val time = Primitive(
             key = "time",
             description = "Time taken total, measured in hours",
-            type = ScalarType.Long
+            type = PrimitiveType.Long
     ).register()
 
-    val startTime = Scalar(
+    val startTime = Primitive(
             key = "start_time",
             description = "Start time",
-            type = ScalarType.Date
+            type = PrimitiveType.Date
     ).register()
 
-    val endTime = Scalar(
+    val endTime = Primitive(
             key = "end_time",
             description = "End time",
-            type = ScalarType.Date
+            type = PrimitiveType.Date
     ).register()
 
 }
