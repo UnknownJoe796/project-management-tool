@@ -1,10 +1,10 @@
-import com.ivieleague.kotlin.server.auth.AbstractUserTable
-import com.ivieleague.kotlin.server.model.PrimitiveType
-import com.ivieleague.kotlin.server.model.TableImpl
-import com.ivieleague.kotlin.server.type.Condition
-import com.ivieleague.kotlin.server.type.Link
-import com.ivieleague.kotlin.server.type.Multilink
-import com.ivieleague.kotlin.server.type.Primitive
+import com.ivieleague.kotlin.server.old.auth.AbstractUserTable
+import com.ivieleague.kotlin.server.old.model.PrimitiveType
+import com.ivieleague.kotlin.server.old.model.TableImpl
+import com.ivieleague.kotlin.server.old.type.Condition
+import com.ivieleague.kotlin.server.old.type.Link
+import com.ivieleague.kotlin.server.old.type.Multilink
+import com.ivieleague.kotlin.server.old.type.Primitive
 
 
 object Note : TableImpl("note", "A note of some kind") {
