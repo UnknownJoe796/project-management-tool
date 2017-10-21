@@ -4,15 +4,7 @@
  */
 
 import com.auth0.jwt.algorithms.Algorithm
-import com.ivieleague.kotlin.server.old.auth.TokenInformation
-import com.ivieleague.kotlin.server.old.auth.restLogin
-import com.ivieleague.kotlin.server.old.auth.user
-import com.ivieleague.kotlin.server.old.model.Schema
-import com.ivieleague.kotlin.server.old.model.register
-import com.ivieleague.kotlin.server.old.respondJson
-import com.ivieleague.kotlin.server.old.restNest
-import com.ivieleague.kotlin.server.old.security
-import com.ivieleague.kotlin.server.old.xodus.xodus
+import com.ivieleague.kotlin.server.TokenInformation
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
