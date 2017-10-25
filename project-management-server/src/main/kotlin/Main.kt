@@ -11,7 +11,7 @@ import com.ivieleague.kotlin.server.rpc.GetTypesRPCMethod
 import com.ivieleague.kotlin.server.rpc.RPCMethod
 import com.ivieleague.kotlin.server.rpc.rpc
 import com.ivieleague.kotlin.server.type.SInt
-import com.ivieleague.kotlin.server.type.TypedObject
+import com.ivieleague.kotlin.server.type.SimpleTypedObject
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
@@ -41,7 +41,7 @@ fun main(vararg strings: String) {
             null
         else {
             val id = tokenInformation.getUserId(token)
-            TypedObject(User).apply {
+            SimpleTypedObject(User).apply {
                 this[IdField] = id
             }
         }
@@ -55,7 +55,7 @@ fun main(vararg strings: String) {
         override val returns: RPCMethod.Returns = RPCMethod.Returns("The input value plus 2", SInt)
         override val potentialExceptions: Map<Int, RPCMethod.PotentialException<*>> = mapOf()
 
-        override fun invoke(user: TypedObject?, arguments: Map<String, Any?>): Any? = (arguments["value"] as Int) + 2
+        override fun invoke(user: SimpleTypedObject?, arguments: Map<String, Any?>): Any? = (arguments["value"] as Int) + 2
     }
     methods["getMethods"] = GetMethodsRPCMethod(methods)
     methods["getTypes"] = GetTypesRPCMethod(methods)
