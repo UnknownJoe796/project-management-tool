@@ -4,20 +4,31 @@
  */
 
 import com.auth0.jwt.algorithms.Algorithm
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.ivieleague.kotlin.server.TokenInformation
+import com.ivieleague.kotlin.server.access.IdField
+import com.ivieleague.kotlin.server.rpc.GetMethodsRPCMethod
+import com.ivieleague.kotlin.server.rpc.GetTypesRPCMethod
+import com.ivieleague.kotlin.server.rpc.RPCMethod
+import com.ivieleague.kotlin.server.rpc.rpc
+import com.ivieleague.kotlin.server.type.SInt
+import com.ivieleague.kotlin.server.type.TypedObject
 import jetbrains.exodus.entitystore.PersistentEntityStores
 import org.jetbrains.ktor.application.ApplicationCall
 import org.jetbrains.ktor.application.install
-import org.jetbrains.ktor.content.files
-import org.jetbrains.ktor.content.static
 import org.jetbrains.ktor.features.Compression
 import org.jetbrains.ktor.host.embeddedServer
 import org.jetbrains.ktor.logging.CallLogging
 import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.request.header
-import org.jetbrains.ktor.routing.get
 import org.jetbrains.ktor.routing.route
 import org.jetbrains.ktor.routing.routing
+import kotlin.collections.HashMap
+import kotlin.collections.List
+import kotlin.collections.Map
+import kotlin.collections.listOf
+import kotlin.collections.mapOf
+import kotlin.collections.set
 
 fun main(vararg strings: String) {
 
@@ -29,37 +40,38 @@ fun main(vararg strings: String) {
 
     val xodusEntityStore = PersistentEntityStores.newInstance("~/xodus_test")
 
-    val schema = Schema()
-    val userAccessDirect = User.xodus(xodusEntityStore).user(tokenInformation)
-    val userAccess = userAccessDirect.security().register(schema)
-    val noteAccess = Note.xodus(xodusEntityStore).security().register(schema)
 
     val authGetter = { call: ApplicationCall ->
         val token = call.request.header("Authorization")
         if (token == null)
             null
-        else
-            tokenInformation.getUser(userAccess, schema, token, userAccess.table.defaultRead())
+        else {
+            val id = tokenInformation.getUserId(token)
+            TypedObject(User).apply {
+                this[IdField] = id
+            }
+        }
     }
+
+    val methods = HashMap<String, RPCMethod>()
+
+    methods["test"] = object : RPCMethod {
+        override val description: String = "A test function.  Will return the value given plus 2."
+        override val arguments: List<RPCMethod.Argument> = listOf(RPCMethod.Argument("value", "The value to manipulate", SInt))
+        override val returns: RPCMethod.Returns = RPCMethod.Returns("The input value plus 2", SInt)
+        override val potentialExceptions: Map<Int, RPCMethod.PotentialException<*>> = mapOf()
+
+        override fun invoke(user: TypedObject?, arguments: Map<String, Any?>): Any? = (arguments["value"] as Int) + 2
+    }
+    methods["getMethods"] = GetMethodsRPCMethod(methods)
+    methods["getTypes"] = GetTypesRPCMethod(methods)
 
     embeddedServer(Netty, 8080) {
         install(CallLogging)
         install(Compression)
         routing {
-            get("/") {
-                it.respondJson("Hello, world!")
-            }
-            route("rest") {
-                restNest(
-                        schema = schema,
-                        userGetter = authGetter
-                )
-                route("user/login") {
-                    restLogin(schema, userAccessDirect, User.email)
-                }
-            }
-            static("static") {
-                files("static")
+            route("rpc") {
+                rpc(ObjectMapper(), methods, authGetter)
             }
         }
         Unit
