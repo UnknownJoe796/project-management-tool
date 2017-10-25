@@ -4,7 +4,6 @@
  */
 
 import com.auth0.jwt.algorithms.Algorithm
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.ivieleague.kotlin.server.TokenInformation
 import com.ivieleague.kotlin.server.access.IdField
 import com.ivieleague.kotlin.server.rpc.GetMethodsRPCMethod
@@ -23,11 +22,6 @@ import org.jetbrains.ktor.netty.Netty
 import org.jetbrains.ktor.request.header
 import org.jetbrains.ktor.routing.route
 import org.jetbrains.ktor.routing.routing
-import kotlin.collections.HashMap
-import kotlin.collections.List
-import kotlin.collections.Map
-import kotlin.collections.listOf
-import kotlin.collections.mapOf
 import kotlin.collections.set
 
 fun main(vararg strings: String) {
@@ -71,7 +65,7 @@ fun main(vararg strings: String) {
         install(Compression)
         routing {
             route("rpc") {
-                rpc(ObjectMapper(), methods, authGetter)
+                rpc(methods, authGetter)
             }
         }
         Unit
