@@ -31,6 +31,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../kotlin-server/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../kotlin-server/src/test/kotlin" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../kotlin-server/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../kotlin-server/src/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

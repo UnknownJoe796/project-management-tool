@@ -16,7 +16,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-observable/kotlin-observable_test.iml" group="kotlin-observable" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server.iml" group="kotlin-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_main.iml" group="kotlin-server" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-server/kotlin-server_test.iml" group="kotlin-server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web.iml" group="kotlin-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_main.iml" group="kotlin-web" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-web/kotlin-web_test.iml" group="kotlin-web" />
