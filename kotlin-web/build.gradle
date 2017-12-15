@@ -2,7 +2,7 @@ group 'ivieleague'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.3-2'
+    ext.kotlin_version = '1.2.0'
 
     repositories {
         mavenCentral()
@@ -22,23 +22,21 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
 }
 
-compileKotlin2Js {
-    kotlinOptions.outputFile = "${projectDir}/build/js/module.js"
-    kotlinOptions.moduleKind = "umd"
-    kotlinOptions.sourceMap = true
-}
-
-build.doLast {
+task assembleWeb(type: Sync) {
     configurations.compile.each { File file ->
-        copy {
+        from(zipTree(file.absolutePath), {
             includeEmptyDirs = false
-
-            from zipTree(file.absolutePath)
-            into "${projectDir}/build/js"
             include { fileTreeElement ->
                 def path = fileTreeElement.path
-                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
+                        !path.startsWith("META-INF/"))
             }
-        }
+        })
     }
+    from compileKotlin2Js.destinationDir
+    into "${projectDir}/web"
+
+    dependsOn classes
 }
+
+assemble.dependsOn assembleWeb

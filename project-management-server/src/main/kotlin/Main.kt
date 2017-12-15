@@ -6,22 +6,24 @@
 import com.auth0.jwt.algorithms.Algorithm
 import com.ivieleague.kotlin.server.TokenInformation
 import com.ivieleague.kotlin.server.access.IdField
-import com.ivieleague.kotlin.server.rpc.GetMethodsRPCMethod
-import com.ivieleague.kotlin.server.rpc.GetTypesRPCMethod
-import com.ivieleague.kotlin.server.rpc.RPCMethod
-import com.ivieleague.kotlin.server.rpc.rpc
+import com.ivieleague.kotlin.server.exceptionWrap
+import com.ivieleague.kotlin.server.rpc.*
 import com.ivieleague.kotlin.server.type.SInt
 import com.ivieleague.kotlin.server.type.SimpleTypedObject
+import io.ktor.application.ApplicationCall
+import io.ktor.application.install
+import io.ktor.features.CallLogging
+import io.ktor.features.Compression
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
+import io.ktor.request.header
+import io.ktor.response.respondText
+import io.ktor.routing.options
+import io.ktor.routing.route
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import jetbrains.exodus.entitystore.PersistentEntityStores
-import org.jetbrains.ktor.application.ApplicationCall
-import org.jetbrains.ktor.application.install
-import org.jetbrains.ktor.features.Compression
-import org.jetbrains.ktor.host.embeddedServer
-import org.jetbrains.ktor.logging.CallLogging
-import org.jetbrains.ktor.netty.Netty
-import org.jetbrains.ktor.request.header
-import org.jetbrains.ktor.routing.route
-import org.jetbrains.ktor.routing.routing
 import kotlin.collections.set
 
 fun main(vararg strings: String) {
@@ -42,7 +44,7 @@ fun main(vararg strings: String) {
         else {
             val id = tokenInformation.getUserId(token)
             SimpleTypedObject(User).apply {
-                this[IdField] = id
+                this[IdField[User]] = id
             }
         }
     }
@@ -51,11 +53,11 @@ fun main(vararg strings: String) {
 
     methods["test"] = object : RPCMethod {
         override val description: String = "A test function.  Will return the value given plus 2."
-        override val arguments: List<RPCMethod.Argument> = listOf(RPCMethod.Argument("value", "The value to manipulate", SInt))
-        override val returns: RPCMethod.Returns = RPCMethod.Returns("The input value plus 2", SInt)
+        override val arguments: List<RPCMethod.Argument<*>> = listOf(RPCMethod.Argument("value", "The value to manipulate", SInt))
+        override val returns: RPCMethod.Returns<*> = RPCMethod.Returns("The input value plus 2", SInt)
         override val potentialExceptions: Map<Int, RPCMethod.PotentialException<*>> = mapOf()
 
-        override fun invoke(user: SimpleTypedObject?, arguments: Map<String, Any?>): Any? = (arguments["value"] as Int) + 2
+        override fun invoke(transaction: Transaction, arguments: Map<String, Any?>): Any? = (arguments["value"] as Int) + 2
     }
     methods["getMethods"] = GetMethodsRPCMethod(methods)
     methods["getTypes"] = GetTypesRPCMethod(methods)
@@ -65,7 +67,12 @@ fun main(vararg strings: String) {
         install(Compression)
         routing {
             route("rpc") {
-                rpc(methods, authGetter)
+                this.rpc(methods, authGetter) { _, _, _ -> }
+            }
+            options("rpc") {
+                exceptionWrap {
+                    it.respondText("YES I EXIST", ContentType.Text.Plain, HttpStatusCode.OK)
+                }
             }
         }
         Unit

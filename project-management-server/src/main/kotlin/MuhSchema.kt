@@ -2,56 +2,57 @@ import com.ivieleague.kotlin.server.access.IdField
 import com.ivieleague.kotlin.server.type.SClass
 import com.ivieleague.kotlin.server.type.SList
 import com.ivieleague.kotlin.server.type.SString
+import com.ivieleague.kotlin.server.type.TypeField
 
 object Note : SClass {
 
     override val name: String = "note"
     override val description: String = "A note of some kind"
 
-    val title = SClass.Field(
+    val title = TypeField(
             key = "title",
             description = "The title of the note.",
             type = SString
     )
 
-    val content = SClass.Field(
+    val content = TypeField(
             key = "content",
             description = "The content of the note.",
             type = SString
     )
 
-    val related = SClass.Field(
+    val related = TypeField(
             key = "related",
             description = "A related note.",
             type = Note
     )
 
-    override val fields = listOf(IdField, title, content, related).associate { it.key to it }
+    override val fields = listOf(IdField[this], title, content, related).associate { it.key to it }
 }
 
 object User : SClass {
     override val name: String = "User"
     override val description: String = "A user of the system."
 
-    val firstName = SClass.Field(
+    val firstName = TypeField(
             key = "firstName",
             description = "The user's first name.",
             type = SString
     )
 
-    val lastName = SClass.Field(
+    val lastName = TypeField(
             key = "lastName",
             description = "The user's last name.",
             type = SString
     )
 
-    val email = SClass.Field(
+    val email = TypeField(
             key = "email",
             description = "The user's email.",
             type = SString
     )
 
-    override val fields = listOf(IdField, firstName, lastName, email).associate { it.key to it }
+    override val fields = listOf(IdField[this], firstName, lastName, email).associate { it.key to it }
 }
 
 object Organization : SClass {
@@ -59,25 +60,25 @@ object Organization : SClass {
     override val name: String = "organization"
     override val description: String = "An organization that employees can belong to."
 
-    val organizationName = SClass.Field(
+    val organizationName = TypeField(
             key = "name",
             description = "The name of the organization",
             type = SString
     )
 
-    val members = SClass.Field(
+    val members = TypeField(
             key = "members",
             description = "The members of this organization",
             type = SList[User]
     )
 
-    val admins = SClass.Field(
+    val admins = TypeField(
             key = "admins",
             description = "The admins of this organization",
             type = SList[User]
     )
 
-    override val fields = listOf(IdField, organizationName, members, admins).associate { it.key to it }
+    override val fields = listOf(IdField[this], organizationName, members, admins).associate { it.key to it }
 }
 
 //object Task : TableImpl("task", "A task, representing anything as large as a project and a small subtask.") {

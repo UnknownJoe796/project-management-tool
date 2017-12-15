@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../kotlin-server">
-      <sourceFolder url="file://$MODULE_DIR$/../../../kotlin-server/src/test/kotlin" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../../kotlin-server/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../kotlin-server/build" />
       <excludeFolder url="file://$MODULE_DIR$/../../../kotlin-server/out" />
